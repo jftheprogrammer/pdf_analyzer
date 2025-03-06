@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Analyzer - Similarity & AI Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>PDF Analyzer</h1>
+            <p>Analyze PDFs for similarity and AI-generated content (using RapidAPI Llama model for detection)</p>
+            <button id="contrast-toggle" class="btn btn-outline-light">High Contrast</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="alert-container"></div>
+
+        <div class="main">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-upload"></i> Upload PDF Files</h2>
+                <div class="form-group">
+                    <label for="similarity-slider" class="form-label">Similarity Threshold: <span id="threshold-value">80%</span></label>
+                    <input type="range" id="similarity-slider" class="form-range" min="10" max="100" step="10" value="80" aria-label="Similarity threshold">
+                </div>
+                <div id="upload-container" class="upload-container">
+                    <div class="upload-icon"><i class="fas fa-file-upload"></i></div>
+                    <div class="upload-text">
+                        <p>Drag & drop PDF files here or</p>
+                        <button class="btn btn-primary">Choose Files</button>
+                    </div>
+                    <input type="file" id="file-input" class="file-input" multiple accept=".pdf" aria-label="Upload PDF files">
+                    <div class="progress mt-3" role="progressbar" aria-label="Upload progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar-inner">0%</div>
+                    </div>
+                    <p id="progress-status" class="text-muted mt-2">Waiting for files...</p>
+                </div>
+                <div id="file-list-container" class="hidden">
+                    <h3 class="mt-4 mb-2">Uploaded Files</h3>
+                    <div id="file-list" class="file-list"></div>
+                    <button id="clear-all-btn" class="btn btn-danger mt-2">Clear All Files</button>
+                </div>
+                <button id="analyze-btn" class="btn btn-primary mt-3" disabled aria-label="Analyze uploaded files">
+                    <i class="fas fa-search"></i> Analyze Files
+                </button>
+            </div>
+            <div id="results-container" class="card hidden"></div>
+            <div id="converse-container" class="card">
+                <h2 class="card-title"><i class="fas fa-comments"></i> Converse with PDF</h2>
+                <div class="form-group">
+                    <label for="converse-text" class="form-label">Enter Text or Question</label>
+                    <textarea id="converse-text" class="form-control" rows="3" placeholder="e.g., Summarize the PDF"></textarea>
+                </div>
+                <button id="converse-btn" class="btn btn-primary mt-2" disabled>Converse</button>
+                <p id="converse-result" class="mt-2"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
